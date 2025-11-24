@@ -1,0 +1,31 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: usermanagement-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/insurance_agent_db
+    username: phanumantagoudra
+    password:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+app:
+  api-key: finance-app-api-key-1234  # app-level key
+
+jwt:
+  secret: 3mR6VwzJ2sP4eYh7M9tZ1bKx0uQ5rNnCkL8vF2pH1tY=  # secure random secret, 32+ bytes
+  access-expiration: 1800             # in seconds (30 min)
+  refresh-expiration: 604800          # in seconds (7 days)
+
+userManagementBaseUrl: http://localhost:8083/api/users
+byEmail: /by-email
