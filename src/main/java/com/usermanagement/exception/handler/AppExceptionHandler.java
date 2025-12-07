@@ -1,7 +1,6 @@
 package com.usermanagement.exception.handler;
 
 import com.common.dto.ApiResponse;
-import com.usermanagement.exception.ApplicationException;
 import com.usermanagement.exception.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +16,9 @@ import static com.common.utils.CommonUtil.errorObject;
 @RestControllerAdvice
 public class AppExceptionHandler {
 
-    @ExceptionHandler(ApplicationException.class)
-    public ResponseEntity<ApiResponse<Object>> handleTechnicalException(ApplicationException exception) {
-        ApiResponse<Object> response = errorObject(exception.getMessage(), exception.getErrorCode());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-    }
-
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<ApiResponse<Object>> handleUserAlreadyExists(UserAlreadyExistsException exception) {
-        ApiResponse<Object> response = errorObject(exception.getMessage(), exception.getErrorCode());
+        ApiResponse<Object> response = errorObject(exception.getErrorCode(), exception.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 

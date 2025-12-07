@@ -11,14 +11,12 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 
 import static com.common.utils.CommonUtil.errorObject;
+import static com.common.utils.Constants.API_KEY;
 
 @Slf4j
 @RestController
@@ -33,8 +31,8 @@ public class AuthController {
 
     @GetMapping("/login")
     public ResponseEntity<?> generateToken(@RequestHeader("username") String username,
-                                                      @RequestHeader("password") String password,
-                                                      @RequestHeader("x-api-key") String apiKey) {
+                                           @RequestHeader("password") String password,
+                                           @RequestHeader(API_KEY) String apiKey) {
         log.info("generateToken called");
         AuthRequest authRequest = AuthRequest.builder()
                 .username(username)
